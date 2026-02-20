@@ -19,7 +19,7 @@ ENHANCEMENTS FOR EMPIRICAL VALIDATION:
 - Experimental signature prediction for LIGO/LISA
 - Reproducibility framework with random seed control
 
-Author: [Your Name]
+Author: Ant O, Greene
 Thesis: 3D Time Structure in Warp Field Dynamics
 Date: 2026-02-21
 Version: 4.0-empirical
