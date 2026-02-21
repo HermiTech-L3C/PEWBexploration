@@ -1,0 +1,40 @@
+cmake_minimum_required(VERSION 3.14)
+project(WarpField3D VERSION 4.0 LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Find packages
+find_package(Eigen3 3.3 REQUIRED NO_MODULE)
+find_package(HDF5 REQUIRED COMPONENTS C)
+find_package(Boost REQUIRED COMPONENTS math)
+
+# Fetch nlohmann/json
+include(FetchContent)
+FetchContent_Declare(
+    json
+    GIT_REPOSITORY https://github.com/nlohmann/json.git
+    GIT_TAG v3.11.2
+)
+FetchContent_MakeAvailable(json)
+
+# Executable
+add_executable(warp_field_3d 
+    src/main.cpp
+    src/physics.cpp
+    src/simulation.cpp
+    src/validation.cpp
+)
+
+target_link_libraries(warp_field_3d
+    Eigen3::Eigen
+    HDF5::HDF5
+    Boost::math
+    nlohmann_json::nlohmann_json
+    OpenMP::OpenMP_CXX
+)
+
+# Optimization flags
+target_compile_options(warp_field_3d PRIVATE 
+    -O3 -march=native -ffast-math -fopenmp
+)
